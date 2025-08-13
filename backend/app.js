@@ -34,6 +34,8 @@ app.use(cors({
     process.env.FRONTEND_URL || 'http://localhost:5173',
     'https://ecosort-ochre.vercel.app',
     'https://ecosort-82e4-n45j1carh-pankaj-baids-projects.vercel.app',
+    'https://eco-sort-qk9v.vercel.app',
+    'https://www.eco-sort-qk9v.vercel.app',
     /^https:\/\/ecosort-.*\.vercel\.app$/,
     /^https:\/\/.*-pankaj-baids-projects\.vercel\.app$/
   ],
