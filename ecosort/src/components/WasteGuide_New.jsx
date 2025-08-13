@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -21,7 +20,6 @@ import {
 } from 'lucide-react';
 import { wasteItemAPI, wasteLogAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-import { GridSkeleton, TextSkeleton, CardSkeleton, StatsSkeleton } from './SkeletonLoader';
 import toast from 'react-hot-toast';
 
 const WasteGuide = () => {
@@ -88,8 +86,8 @@ const WasteGuide = () => {
     },
   ];
 
-  // Fetch waste items function
-  const fetchWasteItems = useCallback(async (page = 1) => {
+  // Fetch waste items
+  const fetchWasteItems = async (page = 1) => {
     try {
       setIsLoading(true);
       const params = {
@@ -115,7 +113,7 @@ const WasteGuide = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [searchQuery, selectedCategory]);
+  };
 
   // Search with debounce
   useEffect(() => {
@@ -124,12 +122,12 @@ const WasteGuide = () => {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [fetchWasteItems]);
+  }, [searchQuery, selectedCategory]);
 
   // Initial load
   useEffect(() => {
     fetchWasteItems();
-  }, [fetchWasteItems]);
+  }, []);
 
   // Handle item click
   const handleItemClick = async (item) => {
@@ -190,7 +188,7 @@ const WasteGuide = () => {
       {/* Hero Section */}
       <motion.section 
         ref={heroRef}
-        className="relative pb-16 overflow-hidden"
+        className="relative pt-20 pb-16 overflow-hidden"
       >
         {/* Animated Background */}
         <div className="absolute inset-0 hero-gradient opacity-5" />
@@ -264,35 +262,24 @@ const WasteGuide = () => {
               animate={statsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.8 }}
             >
-              {isLoading ? (
-                // Stats Skeleton Loading
-                <StatsSkeleton 
-                  count={3} 
-                  variant="card" 
-                  showIcon={true}
-                  animate="pulse"
-                  className="h-24"
-                />
-              ) : (
-                [
-                  { icon: Sparkles, label: 'Waste Items', value: pagination.totalCount || '50+' },
-                  { icon: TrendingUp, label: 'Categories', value: '5' },
-                  { icon: Award, label: 'Max Points', value: '20' }
-                ].map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    className="stat-card-gradient text-center p-6"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={statsInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 1 + index * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <stat.icon className="w-8 h-8 mx-auto mb-3 text-white" />
-                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                    <div className="text-sm text-white/80">{stat.label}</div>
-                  </motion.div>
-                ))
-              )}
+              {[
+                { icon: Sparkles, label: 'Waste Items', value: '50+' },
+                { icon: TrendingUp, label: 'Categories', value: '5' },
+                { icon: Award, label: 'Max Points', value: '20' }
+              ].map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  className="stat-card-gradient text-center p-6"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={statsInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ delay: 1 + index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <stat.icon className="w-8 h-8 mx-auto mb-3 text-white" />
+                  <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-sm text-white/80">{stat.label}</div>
+                </motion.div>
+              ))}
             </motion.div>
           </motion.div>
         </div>
@@ -369,34 +356,15 @@ const WasteGuide = () => {
       {/* Results Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         {isLoading ? (
-          // Enhanced Skeleton Loading State
-          <div className="space-y-8">
-            {/* Search Results Header Skeleton */}
-            <div className="flex items-center justify-between">
-              <TextSkeleton variant="glass" width="200px" height="32px" />
-              <TextSkeleton variant="neon" width="80px" height="24px" />
-            </div>
-            
-            {/* Results Grid Skeleton */}
-            <GridSkeleton
-              variant="holographic"
-              columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-              count={12}
-              itemHeight="280px"
-              gap="24px"
-              showShimmer={true}
-              animate="wave"
-            />
-            
-            {/* Pagination Skeleton */}
-            <div className="flex justify-center space-x-2">
-              {[...Array(5)].map((_, i) => (
-                <div
-                  key={i}
-                  className="w-10 h-10 bg-gradient-to-r from-eco-bg-200 via-eco-bg-300 to-eco-bg-200 rounded-eco animate-skeleton-shimmer"
-                />
-              ))}
-            </div>
+          // Loading State
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[...Array(12)].map((_, index) => (
+              <div key={index} className="card p-6 animate-pulse">
+                <div className="w-full h-32 bg-eco-bg-200 rounded-eco mb-4"></div>
+                <div className="h-4 bg-eco-bg-200 rounded mb-2"></div>
+                <div className="h-3 bg-eco-bg-200 rounded w-3/4"></div>
+              </div>
+            ))}
           </div>
         ) : wasteItems.length > 0 ? (
           <motion.div 

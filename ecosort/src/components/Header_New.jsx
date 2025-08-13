@@ -17,8 +17,7 @@ import {
   Award,
   Gem,
   DollarSign,
-  Plus,
-  Building2
+  Plus
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -69,12 +68,6 @@ const Header = () => {
       label: 'Scrap Prices', 
       icon: DollarSign,
       description: 'Current market rates'
-    },
-    { 
-      path: '/public-toilets', 
-      label: 'Public Toilets', 
-      icon: Building2,
-      description: 'Find clean facilities'
     }
   ];
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import CountUp from 'react-countup';
 import { 
@@ -18,12 +19,14 @@ import {
   Shield,
   Bell,
   Eye,
+  Lock,
+  Globe,
   UserCheck,
   Crown,
   Zap
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { CardSkeleton, StatsSkeleton, AvatarSkeleton, TextSkeleton } from './SkeletonLoader';
+import { CardSkeleton, StatsSkeleton, AvatarSkeleton, TextSkeleton, GridSkeleton } from './SkeletonLoader';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 
@@ -50,8 +53,8 @@ const Profile = () => {
         if (response.data.success) {
           setUserStats(response.data.data);
         }
-      } catch (err) {
-        console.error('Failed to fetch user stats:', err);
+      } catch (error) {
+        console.error('Failed to fetch user stats:', error);
       } finally {
         setIsLoading(false);
       }
@@ -76,7 +79,7 @@ const Profile = () => {
         toast.success('Profile updated successfully!');
         setIsEditing(false);
       }
-    } catch (err) {
+    } catch (error) {
       toast.error('Failed to update profile');
     }
   };
@@ -195,7 +198,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-eco-bg-50 via-white to-eco-bg-100">
       {/* Hero Section */}
-      <section className="relative pb-12 overflow-hidden">
+      <section className="relative pt-20 pb-12 overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 hero-gradient opacity-5" />
         

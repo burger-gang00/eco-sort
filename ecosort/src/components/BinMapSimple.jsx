@@ -116,7 +116,7 @@ const BinMapSimple = () => {
     : bins;
 
   return (
-    <div className="h-full w-full p-6 bg-gray-50">
+    <div className="min-h-screen w-full p-6 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">

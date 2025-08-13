@@ -30,7 +30,6 @@ import {
 import api from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from './LoadingSpinner';
-import { StatsSkeleton, ChartSkeleton, ListSkeleton } from './SkeletonLoader';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
@@ -120,45 +119,8 @@ const Dashboard = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-eco-bg-50 via-white to-eco-bg-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          {/* Hero Skeleton */}
-          <div className="text-center mb-12 space-y-4">
-            <div className="h-12 bg-gradient-to-r from-eco-bg-200 via-eco-bg-100 to-eco-bg-200 rounded-eco w-96 mx-auto animate-skeleton-pulse" />
-            <div className="h-6 bg-gradient-to-r from-eco-bg-200 via-eco-bg-100 to-eco-bg-200 rounded-eco w-64 mx-auto animate-skeleton-pulse" />
-          </div>
-          
-          {/* Stats Skeleton */}
-          <StatsSkeleton stats={4} className="mb-12" />
-          
-          {/* Charts Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            <ChartSkeleton type="bar" />
-            <ChartSkeleton type="pie" />
-          </div>
-          
-          {/* Additional Charts */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            <ChartSkeleton type="line" />
-            <div className="card p-6">
-              <div className="h-6 bg-gradient-to-r from-eco-bg-200 via-eco-bg-100 to-eco-bg-200 rounded-eco w-48 mb-6 animate-skeleton-pulse" />
-              <ListSkeleton items={5} />
-            </div>
-          </div>
-          
-          {/* Bottom Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="card p-6">
-                <div className="space-y-3">
-                  <div className="h-4 bg-gradient-to-r from-eco-bg-200 via-eco-bg-100 to-eco-bg-200 rounded-eco w-24 animate-skeleton-pulse" />
-                  <div className="h-8 bg-gradient-to-r from-eco-bg-200 via-eco-bg-100 to-eco-bg-200 rounded-eco w-16 animate-skeleton-pulse" />
-                  <div className="h-3 bg-gradient-to-r from-eco-bg-200 via-eco-bg-100 to-eco-bg-200 rounded-eco w-32 animate-skeleton-pulse" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="min-h-screen bg-gradient-to-br from-eco-bg-50 via-white to-eco-bg-100 flex items-center justify-center">
+        <LoadingSpinner />
       </div>
     );
   }
@@ -166,7 +128,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-eco-bg-50 via-white to-eco-bg-100">
       {/* Hero Section */}
-      <section className="relative pb-12 overflow-hidden">
+      <section className="relative pt-20 pb-12 overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 hero-gradient opacity-5" />
         

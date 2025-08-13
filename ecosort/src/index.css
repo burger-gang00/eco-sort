@@ -1,192 +1,406 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-  color-scheme: light;
-  color: #212121;
-  background-color: #F5F9F6;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+/* Base Styles */
+@layer base {
+  * {
+    @apply border-eco-bg-200;
+  }
+  
+  body {
+    @apply bg-eco-bg-50 text-eco-text-primary font-sans antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-* {
-  box-sizing: border-box;
+/* Component Styles */
+@layer components {
+  /* Advanced Glass Morphism Effects */
+  .glass {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20 shadow-glass;
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/10 border border-black/20 shadow-glass;
+  }
+  
+  .glass-eco {
+    @apply backdrop-blur-xl bg-eco-primary-100 bg-opacity-20 border border-eco-primary-200 shadow-glass;
+  }
+  
+  .glass-strong {
+    @apply backdrop-blur-2xl bg-white/20 border border-white/30 shadow-glass-lg;
+  }
+  
+  .glass-ultra {
+    @apply backdrop-blur-3xl bg-white/30 border border-white/40 shadow-glass-xl;
+  }
+  
+  /* Advanced Button Variants */
+  .btn-primary {
+    @apply relative overflow-hidden bg-gradient-eco text-white px-8 py-4 rounded-eco-md font-semibold text-sm tracking-wide transition-all duration-500 hover:shadow-eco-glow hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-30;
+  }
+  
+  .btn-primary::before {
+    @apply absolute inset-0 bg-shimmer bg-[length:200%_100%] opacity-0 transition-opacity duration-300;
+    content: '';
+  }
+  
+  .btn-primary:hover::before {
+    @apply opacity-100 animate-shimmer;
+  }
+  
+  .btn-primary::after {
+    @apply absolute inset-0 bg-gradient-eco opacity-0 transition-opacity duration-300;
+    content: '';
+    filter: brightness(1.2);
+  }
+  
+  .btn-primary:hover::after {
+    @apply opacity-20;
+  }
+  
+  .btn-holographic {
+    @apply relative overflow-hidden bg-gradient-holographic bg-[length:200%_200%] text-white px-8 py-4 rounded-eco-md font-semibold text-sm tracking-wide transition-all duration-500 hover:shadow-holographic hover:-translate-y-0.5 active:translate-y-0 animate-holographic;
+  }
+  
+  .btn-neon {
+    @apply relative bg-transparent border-2 border-green-400 text-green-400 px-8 py-4 rounded-eco-md font-semibold text-sm tracking-wide transition-all duration-300 hover:bg-green-400 hover:text-black hover:shadow-xl;
+  }
+  
+  .btn-gradient-shift {
+    @apply relative overflow-hidden bg-gradient-rainbow bg-[length:400%_400%] text-white px-8 py-4 rounded-eco-md font-semibold text-sm tracking-wide transition-all duration-500 hover:shadow-eco-glow hover:-translate-y-0.5 animate-gradient-shift;
+  }
+  
+  .btn-neuro {
+    @apply bg-eco-bg-100 text-eco-text-primary px-8 py-4 rounded-eco-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:shadow-neuro-inset active:shadow-neuro shadow-neuro;
+  }
+  
+  /* Advanced Card Components */
+  .card {
+    @apply bg-white rounded-eco-lg shadow-eco border border-eco-bg-200 border-opacity-50 transition-all duration-500 hover:shadow-eco-lg hover:-translate-y-2 relative overflow-hidden;
+  }
+  
+  .card::before {
+    @apply absolute inset-0 bg-gradient-eco opacity-0 transition-opacity duration-300;
+    content: '';
+    z-index: -1;
+  }
+  
+  .card:hover::before {
+    @apply opacity-5;
+  }
+  
+  .card-glass {
+    @apply glass rounded-eco-lg shadow-glass border transition-all duration-500 hover:shadow-glass-lg hover:-translate-y-2 hover:backdrop-blur-2xl;
+  }
+  
+  .card-holographic {
+    @apply bg-gradient-holographic bg-[length:200%_200%] text-white rounded-eco-lg shadow-holographic transition-all duration-500 hover:shadow-holographic hover:-translate-y-2 animate-holographic;
+  }
+  
+  .card-neon {
+    @apply bg-black border-2 border-green-400 rounded-eco-lg shadow-xl text-green-400 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2;
+  }
+  
+  .card-floating {
+    @apply card animate-float hover:animate-none;
+  }
+  
+  .card-morphing {
+    @apply card rounded-blob animate-morph;
+  }
+  
+  /* Advanced Input Components */
+  .input {
+    @apply w-full px-4 py-3 bg-white border border-eco-bg-300 rounded-eco text-eco-text-primary placeholder:text-eco-text-tertiary focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:border-green-500 transition-all duration-300;
+  }
+  
+  .input-glass {
+    @apply glass w-full px-4 py-3 text-eco-text-primary placeholder:text-eco-text-tertiary focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:border-green-500 focus:border-opacity-50 transition-all duration-300 hover:backdrop-blur-2xl;
+  }
+  
+  .input-neon {
+    @apply w-full px-4 py-3 bg-transparent border-2 border-green-400 text-green-400 placeholder:text-green-400 placeholder:opacity-50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:shadow-xl transition-all duration-300;
+  }
+  
+  .input-holographic {
+    @apply w-full px-4 py-3 bg-gradient-holographic bg-[length:200%_200%] border border-transparent text-white placeholder:text-white placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30 transition-all duration-300 animate-holographic;
+  }
+  
+  /* Advanced Navigation */
+  .nav-link {
+    @apply relative text-eco-text-secondary hover:text-eco-primary-600 px-4 py-2 rounded-eco font-medium transition-all duration-300 hover:bg-eco-bg-100 overflow-hidden;
+  }
+  
+  .nav-link::before {
+    @apply absolute inset-0 bg-gradient-eco opacity-0 transition-opacity duration-300;
+    content: '';
+    z-index: -1;
+  }
+  
+  .nav-link:hover::before {
+    @apply opacity-10;
+  }
+  
+  .nav-link::after {
+    @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-eco-primary-600 transition-all duration-300;
+    content: '';
+    transform: translateX(-50%);
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .nav-link-holographic {
+    @apply nav-link bg-gradient-holographic bg-[length:200%_200%] bg-clip-text text-transparent animate-holographic;
+  }
+  
+  /* Advanced Hero Section */
+  .hero-gradient {
+    background: linear-gradient(135deg, #059669 0%, #10b981 25%, #0ea5e9 50%, #f59e0b 75%, #22c55e 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  .hero-holographic {
+    background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b, #ff006e);
+    background-size: 400% 400%;
+    animation: holographic 3s ease-in-out infinite;
+  }
+  
+  .hero-mesh {
+    @apply bg-gradient-mesh;
+    background-size: 400% 400%;
+    animation: gradientXY 10s ease infinite;
+  }
+  
+  /* Floating Elements - Advanced */
+  .floating {
+    @apply animate-float;
+  }
+  
+  .floating-slow {
+    @apply animate-float-slow;
+  }
+  
+  .floating-sway {
+    @apply animate-sway;
+  }
+  
+  .floating-orbit {
+    @apply animate-orbit;
+  }
+  
+  /* Advanced Progress Bars */
+  .progress-bar {
+    @apply w-full bg-eco-bg-200 rounded-full h-3 overflow-hidden relative;
+  }
+  
+  .progress-fill {
+    @apply h-full bg-gradient-eco rounded-full transition-all duration-1000 ease-out relative overflow-hidden;
+  }
+  
+  .progress-fill::before {
+    @apply absolute inset-0 bg-shimmer bg-[length:200%_100%] animate-shimmer;
+    content: '';
+  }
+  
+  .progress-holographic {
+    @apply w-full bg-black rounded-full h-3 overflow-hidden;
+  }
+  
+  .progress-holographic .progress-fill {
+    @apply bg-gradient-holographic bg-[length:200%_200%] animate-holographic;
+  }
+  
+  .progress-neon {
+    @apply w-full bg-black rounded-full h-3 overflow-hidden border border-green-400;
+  }
+  
+  .progress-neon .progress-fill {
+    @apply bg-green-400 shadow-lg;
+  }
+  
+  /* Advanced Text Effects */
+  .text-gradient {
+    @apply bg-gradient-eco bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-rainbow {
+    @apply bg-gradient-rainbow bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-holographic {
+    @apply bg-gradient-holographic bg-[length:200%_200%] bg-clip-text text-transparent animate-holographic;
+  }
+  
+  .text-neon {
+    @apply text-green-400;
+    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+  }
+  
+  .text-neon-glow {
+    @apply text-green-400 animate-neon-glow;
+  }
+  
+  .text-shimmer {
+    @apply bg-gradient-to-r from-eco-text-primary via-eco-primary-600 to-eco-text-primary bg-[length:200%_100%] bg-clip-text text-transparent animate-shimmer;
+  }
+  
+  .text-typing {
+    @apply animate-typing whitespace-nowrap overflow-hidden border-r-2 border-green-500;
+  }
+  
+  /* Particle Effects */
+  .particles::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-dots opacity-30 animate-float;
+  }
+  
+  .particles::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-dots opacity-20 animate-float-slow;
+    background-size: 8px 8px;
+    background-position: 4px 4px;
+  }
+  
+  /* Advanced Badges */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-300;
+  }
+  
+  .badge-holographic {
+    @apply badge bg-gradient-holographic bg-[length:200%_200%] text-white animate-holographic;
+  }
+  
+  .badge-neon {
+    @apply badge bg-black border-2 border-green-400 text-green-400 shadow-lg;
+  }
+  
+  .badge-glass {
+    @apply badge glass text-eco-text-primary;
+  }
+  
+  .badge-morphing {
+    @apply badge bg-gradient-eco text-white animate-morph;
+  }
+  
+  /* Stats Cards */
+  .stat-card {
+    @apply bg-white rounded-eco-lg p-6 shadow-eco border border-eco-bg-200 border-opacity-50 transition-all duration-300 hover:shadow-eco-lg hover:-translate-y-1;
+  }
+  
+  .stat-card-gradient {
+    @apply bg-gradient-eco text-white rounded-eco-lg p-6 shadow-eco-lg transition-all duration-300 hover:shadow-eco-glow hover:-translate-y-1;
+  }
+  
+  /* Legacy Badge Classes for Compatibility */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .badge-success {
+    @apply bg-eco-success-50 text-eco-success-600 border border-eco-success-500 border-opacity-20;
+  }
+  
+  .badge-warning {
+    @apply bg-eco-warning-50 text-eco-warning-600 border border-eco-warning-500 border-opacity-20;
+  }
+  
+  .badge-error {
+    @apply bg-eco-error-50 text-eco-error-600 border border-eco-error-500 border-opacity-20;
+  }
+  
+  .badge-info {
+    @apply bg-eco-info-50 text-eco-info-600 border border-eco-info-500 border-opacity-20;
+  }
+  
+  .badge-wet {
+    @apply badge bg-eco-success-50 text-eco-success-600 border border-eco-success-500 border-opacity-20;
+  }
+  
+  .badge-dry {
+    @apply badge bg-eco-secondary-100 text-eco-secondary-600 border border-eco-secondary-200;
+  }
+  
+  .badge-ewaste {
+    @apply badge bg-eco-accent-100 text-eco-accent-600 border border-eco-accent-200;
+  }
+  
+  .badge-hazardous {
+    @apply badge bg-eco-error-50 text-eco-error-600 border border-eco-error-500 border-opacity-20;
+  }
+  
+  .badge-recyclable {
+    @apply badge bg-purple-100 text-purple-700 border border-purple-200;
+  }
+  
+  /* Form Elements */
+  .input-field {
+    @apply input;
+  }
+  
+  .search-input {
+    @apply input pl-12;
+  }
+  
+  /* Text Gradients */
+  .text-gradient {
+    @apply bg-gradient-eco bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-secondary {
+    @apply bg-gradient-secondary bg-clip-text text-transparent;
+  }
+  
+  /* Loading Spinner */
+  .loading-spinner {
+    @apply inline-block w-6 h-6 border-2 border-current border-r-transparent rounded-full animate-spin;
+  }
+  
+  /* Leaflet Map Customization */
+  .leaflet-container {
+    @apply rounded-eco-lg;
+  }
+  
+  /* Toast Container */
+  .toast-container {
+    z-index: 9999;
+  }
+  
+  /* Modal Backdrop */
+  .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #F5F9F6;
-}
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-}
-
-/* Custom scrollbar */
+/* Global Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f5f9;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4CAF50;
+  background: #059669;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #45a049;
-}
-
-/* Custom button styles */
-@layer components {
-  .btn-primary {
-    @apply bg-eco-green text-white px-6 py-3 rounded-eco font-medium hover:bg-green-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-eco-green focus:ring-opacity-50 shadow-eco hover:shadow-eco-lg;
-  }
-  
-  .btn-secondary {
-    @apply bg-eco-blue text-white px-6 py-3 rounded-eco font-medium hover:bg-blue-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-eco-blue focus:ring-opacity-50 shadow-eco hover:shadow-eco-lg;
-  }
-  
-  .btn-outline {
-    @apply border-2 border-eco-green text-eco-green px-6 py-3 rounded-eco font-medium hover:bg-eco-green hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-eco-green focus:ring-opacity-50;
-  }
-  
-  .card {
-    @apply bg-white rounded-eco-lg shadow-eco p-6 hover:shadow-eco-lg transition-all duration-200;
-  }
-  
-  .input-field {
-    @apply w-full px-4 py-3 rounded-eco border border-gray-300 focus:border-eco-green focus:ring-2 focus:ring-eco-green focus:ring-opacity-20 focus:outline-none transition-all duration-200;
-  }
-  
-  .search-input {
-    @apply input-field pl-12;
-  }
-  
-  .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
-  }
-  
-  .badge-wet {
-    @apply badge bg-eco-green bg-opacity-10 text-eco-green;
-  }
-  
-  .badge-dry {
-    @apply badge bg-eco-blue bg-opacity-10 text-eco-blue;
-  }
-  
-  .badge-ewaste {
-    @apply badge bg-eco-yellow bg-opacity-10 text-yellow-700;
-  }
-  
-  .badge-hazardous {
-    @apply badge bg-eco-red bg-opacity-10 text-eco-red;
-  }
-  
-  .badge-recyclable {
-    @apply badge bg-purple-100 text-purple-700;
-  }
-  
-  .nav-link {
-    @apply text-eco-dark hover:text-eco-green transition-colors duration-200 font-medium;
-  }
-  
-  .nav-link.active {
-    @apply text-eco-green;
-  }
-}
-
-/* Leaflet map fixes */
-.leaflet-container {
-  @apply rounded-eco-lg;
-}
-
-/* Loading spinner */
-.loading-spinner {
-  @apply inline-block w-6 h-6 border-2 border-current border-r-transparent rounded-full animate-spin;
-}
-
-/* Toast notifications positioning */
-.toast-container {
-  z-index: 9999;
-}
-
-/* Modal backdrop */
-.modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  background: #047857;
 }
