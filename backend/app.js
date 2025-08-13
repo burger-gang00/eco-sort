@@ -36,10 +36,13 @@ app.use(cors({
     'https://ecosort-82e4-n45j1carh-pankaj-baids-projects.vercel.app',
     'https://eco-sort-qk9v.vercel.app',
     'https://www.eco-sort-qk9v.vercel.app',
+    /^https:\/\/eco-sort-.*\.vercel\.app$/,
     /^https:\/\/ecosort-.*\.vercel\.app$/,
     /^https:\/\/.*-pankaj-baids-projects\.vercel\.app$/
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 // Rate limiting
