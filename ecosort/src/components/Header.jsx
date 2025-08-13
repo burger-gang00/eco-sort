@@ -396,14 +396,14 @@ const Header = () => {
                   <div className="p-6 border-t border-eco-bg-200 space-y-3">
                     <Link
                       to="/login"
-                      className="w-full btn-outline text-center block"
+                      className="w-full inline-flex items-center justify-center px-4 py-3 border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg font-medium text-sm transition-all duration-300"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Sign In
                     </Link>
                     <Link
                       to="/register"
-                      className="w-full btn-primary text-center block"
+                      className="w-full inline-flex items-center justify-center px-4 py-3 bg-gradient-to-r from-green-600 to-green-500 text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Get Started
