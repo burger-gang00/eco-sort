@@ -1,5 +1,5 @@
+DATABASE_URL="postgresql://neondb_owner:npg_Ex1vQZiWT6MP@ep-holy-wind-a1hoqqf7-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 # 🌱 EcoSort - Smart Waste Management System
-
 
 Welcome to EcoSort! This is a full-stack web application that helps users learn proper waste disposal methods, track their eco-friendly activities, and contribute to a more sustainable future.
 
