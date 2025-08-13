@@ -1,5 +1,6 @@
 # 🌱 EcoSort - Smart Waste Management System
-ecosort-82e4.vercel.app
+
+https://eco-sort-qk9v.vercel.app/
 
 Welcome to EcoSort! This is a full-stack web application that helps users learn proper waste disposal methods, track their eco-friendly activities, and contribute to a more sustainable future.
 
