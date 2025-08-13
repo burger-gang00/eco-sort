@@ -142,6 +142,201 @@ const scrapPrices = [
   { materialName: 'Tin', pricePerKg: 280 }
 ];
 
+const publicToilets = [
+  {
+    name: 'Central Park Eco Facility',
+    address: '456 Green Street, Downtown',
+    latitude: 40.7829,
+    longitude: -73.9654,
+    rating: 4.8,
+    reviews: 124,
+    accessibility: true,
+    wifi: true,
+    parking: true,
+    babyFacilities: true,
+    isEcoFriendly: true,
+    status: 'OPEN',
+    openHours: '24/7',
+    features: ['Water Saving', 'Solar Power', 'Composting', 'Recycled Materials'],
+    amenities: ['Hand Sanitizer', 'Air Dryer', 'Baby Station', 'Wheelchair Access'],
+    lastCleaned: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+    cleanlinessRating: 4.9,
+    waitTime: 'No wait',
+    imageUrl: '/api/placeholder/400/300',
+    sustainabilityScore: 95,
+    carbonFootprint: 'Negative',
+    waterSaved: '2,340L/month'
+  },
+  {
+    name: 'Riverside Smart Restroom',
+    address: '789 River Walk, Waterfront',
+    latitude: 40.7589,
+    longitude: -73.9851,
+    rating: 4.6,
+    reviews: 89,
+    accessibility: true,
+    wifi: true,
+    parking: false,
+    babyFacilities: false,
+    isEcoFriendly: true,
+    status: 'OPEN',
+    openHours: '6:00 AM - 10:00 PM',
+    features: ['Smart Sensors', 'UV Sanitization', 'Rainwater Collection'],
+    amenities: ['Automatic Doors', 'Motion Sensors', 'Emergency Button'],
+    lastCleaned: new Date(Date.now() - 1 * 60 * 60 * 1000), // 1 hour ago
+    cleanlinessRating: 4.7,
+    waitTime: '2 min wait',
+    imageUrl: '/api/placeholder/400/300',
+    sustainabilityScore: 88,
+    carbonFootprint: 'Low',
+    waterSaved: '1,850L/month'
+  },
+  {
+    name: 'Urban Plaza Green Station',
+    address: '321 Commerce Square, Business District',
+    latitude: 40.7505,
+    longitude: -73.9934,
+    rating: 4.4,
+    reviews: 156,
+    accessibility: true,
+    wifi: false,
+    parking: true,
+    babyFacilities: true,
+    isEcoFriendly: true,
+    status: 'MAINTENANCE',
+    openHours: '5:00 AM - 11:00 PM',
+    features: ['Greywater System', 'LED Lighting', 'Natural Ventilation'],
+    amenities: ['Family Room', 'Changing Table', 'Vending Machine'],
+    lastCleaned: new Date(Date.now() - 0.5 * 60 * 60 * 1000), // 30 minutes ago
+    cleanlinessRating: 4.5,
+    waitTime: 'Closed for maintenance',
+    imageUrl: '/api/placeholder/400/300',
+    sustainabilityScore: 82,
+    carbonFootprint: 'Neutral',
+    waterSaved: '1,620L/month'
+  },
+  {
+    name: 'Innovation Hub Facility',
+    address: '654 Tech Boulevard, Innovation District',
+    latitude: 40.7614,
+    longitude: -73.9776,
+    rating: 4.9,
+    reviews: 203,
+    accessibility: true,
+    wifi: true,
+    parking: true,
+    babyFacilities: true,
+    isEcoFriendly: true,
+    status: 'OPEN',
+    openHours: '24/7',
+    features: ['AI Monitoring', 'Biomimetic Design', 'Energy Generation'],
+    amenities: ['Wellness Station', 'Phone Charging', 'Climate Control'],
+    lastCleaned: new Date(Date.now() - 0.75 * 60 * 60 * 1000), // 45 minutes ago
+    cleanlinessRating: 4.9,
+    waitTime: 'No wait',
+    imageUrl: '/api/placeholder/400/300',
+    sustainabilityScore: 98,
+    carbonFootprint: 'Negative',
+    waterSaved: '3,120L/month'
+  },
+  {
+    name: 'Community Garden Restroom',
+    address: '987 Green Thumb Lane, Suburb',
+    latitude: 40.7392,
+    longitude: -73.9903,
+    rating: 4.3,
+    reviews: 67,
+    accessibility: false,
+    wifi: false,
+    parking: false,
+    babyFacilities: false,
+    isEcoFriendly: true,
+    status: 'OPEN',
+    openHours: 'Dawn to Dusk',
+    features: ['Composting Toilets', 'Living Roof', 'Natural Materials'],
+    amenities: ['Hand Pump', 'Soap Dispenser', 'Paper Towels'],
+    lastCleaned: new Date(Date.now() - 3 * 60 * 60 * 1000), // 3 hours ago
+    cleanlinessRating: 4.2,
+    waitTime: 'No wait',
+    imageUrl: '/api/placeholder/400/300',
+    sustainabilityScore: 75,
+    carbonFootprint: 'Negative',
+    waterSaved: 'All water saved (waterless)'
+  },
+  {
+    name: 'Transit Hub Super Station',
+    address: '123 Station Plaza, Transport Center',
+    latitude: 40.7484,
+    longitude: -73.9857,
+    rating: 4.7,
+    reviews: 312,
+    accessibility: true,
+    wifi: true,
+    parking: true,
+    babyFacilities: true,
+    isEcoFriendly: true,
+    status: 'OPEN',
+    openHours: '24/7',
+    features: ['Waste-to-Energy', 'Smart Glass', 'Air Purification'],
+    amenities: ['Multi-stall', 'Express Lane', 'Family Rooms', 'Nursing Room'],
+    lastCleaned: new Date(Date.now() - 0.25 * 60 * 60 * 1000), // 15 minutes ago
+    cleanlinessRating: 4.8,
+    waitTime: '1 min wait',
+    imageUrl: '/api/placeholder/400/300',
+    sustainabilityScore: 92,
+    carbonFootprint: 'Low',
+    waterSaved: '2,780L/month'
+  },
+  {
+    name: 'Metro Mall Restroom',
+    address: '555 Shopping Avenue, Mall District',
+    latitude: 40.7650,
+    longitude: -73.9800,
+    rating: 4.2,
+    reviews: 87,
+    accessibility: true,
+    wifi: true,
+    parking: true,
+    babyFacilities: true,
+    isEcoFriendly: false,
+    status: 'OPEN',
+    openHours: '10:00 AM - 10:00 PM',
+    features: ['Air Freshener', 'Hand Dryers', 'Music System'],
+    amenities: ['Baby Station', 'Wheelchair Access', 'Vending Machine'],
+    lastCleaned: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
+    cleanlinessRating: 4.0,
+    waitTime: '3 min wait',
+    imageUrl: '/api/placeholder/400/300',
+    sustainabilityScore: 45,
+    carbonFootprint: 'High',
+    waterSaved: '0L/month'
+  },
+  {
+    name: 'Beachfront Eco Pavilion',
+    address: '222 Ocean Drive, Beachfront',
+    latitude: 40.7300,
+    longitude: -73.9900,
+    rating: 4.5,
+    reviews: 134,
+    accessibility: true,
+    wifi: false,
+    parking: false,
+    babyFacilities: false,
+    isEcoFriendly: true,
+    status: 'OPEN',
+    openHours: '6:00 AM - 8:00 PM',
+    features: ['Solar Power', 'Saltwater Flush', 'Wind Ventilation'],
+    amenities: ['Outdoor Sink', 'Sand Wash Station', 'Emergency Call'],
+    lastCleaned: new Date(Date.now() - 1.5 * 60 * 60 * 1000), // 1.5 hours ago
+    cleanlinessRating: 4.6,
+    waitTime: 'No wait',
+    imageUrl: '/api/placeholder/400/300',
+    sustainabilityScore: 89,
+    carbonFootprint: 'Negative',
+    waterSaved: '1,950L/month'
+  }
+];
+
 async function main() {
   console.log('🌱 Starting EcoSort database seeding...');
 
@@ -149,6 +344,7 @@ async function main() {
     // Clear existing data
     console.log('🧹 Cleaning existing data...');
     await prisma.wasteLog.deleteMany({});
+    await prisma.publicToilet.deleteMany({});
     await prisma.scrapPrice.deleteMany({});
     await prisma.valuableMaterial.deleteMany({});
     await prisma.wasteItem.deleteMany({});
@@ -182,6 +378,13 @@ async function main() {
       scrapPrices.map(price => prisma.scrapPrice.create({ data: price }))
     );
     console.log(`✅ Created ${createdScrapPrices.length} scrap prices`);
+
+    // Seed public toilets
+    console.log('🚻 Seeding public toilets...');
+    const createdPublicToilets = await Promise.all(
+      publicToilets.map(toilet => prisma.publicToilet.create({ data: toilet }))
+    );
+    console.log(`✅ Created ${createdPublicToilets.length} public toilets`);
 
     // Create sample users
     console.log('👥 Creating sample users...');
@@ -236,6 +439,7 @@ async function main() {
     console.log(`   - ${createdBins.length} bins`);
     console.log(`   - ${createdValuableMaterials.length} valuable materials`);
     console.log(`   - ${createdScrapPrices.length} scrap prices`);
+    console.log(`   - ${createdPublicToilets.length} public toilets`);
     console.log(`   - ${createdUsers.length} users`);
     console.log(`   - ${createdLogs.length} waste logs`);
     

@@ -93,6 +93,36 @@ model ScrapPrice {
   @@map("scrap_prices")
 }
 
+model PublicToilet {
+  id                    String    @id @default(cuid())
+  name                  String
+  address               String
+  latitude              Float
+  longitude             Float
+  rating                Float     @default(0)
+  reviews               Int       @default(0)
+  accessibility         Boolean   @default(false)
+  wifi                  Boolean   @default(false)
+  parking               Boolean   @default(false)
+  babyFacilities        Boolean   @default(false)
+  isEcoFriendly         Boolean   @default(false)
+  status                ToiletStatus @default(OPEN)
+  openHours             String?
+  features              String[]  @default([])
+  amenities             String[]  @default([])
+  lastCleaned           DateTime?
+  cleanlinessRating     Float     @default(0)
+  waitTime              String?
+  imageUrl              String?
+  sustainabilityScore   Int       @default(0)
+  carbonFootprint       String?
+  waterSaved            String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("public_toilets")
+}
+
 enum WasteCategory {
   WET
   DRY
@@ -113,4 +143,11 @@ enum ValueLevel {
   LOW
   MEDIUM
   HIGH
+}
+
+enum ToiletStatus {
+  OPEN
+  CLOSED
+  MAINTENANCE
+  TEMPORARILY_CLOSED
 }

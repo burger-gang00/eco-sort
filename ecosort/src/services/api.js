@@ -188,6 +188,51 @@ export const wasteLogAPI = {
   },
 };
 
+// Public Toilets API calls
+export const publicToiletAPI = {
+  getAll: async (params = {}) => {
+    const response = await api.get('/public-toilets', { params });
+    return response.data;
+  },
+  
+  getById: async (id) => {
+    const response = await api.get(`/public-toilets/${id}`);
+    return response.data;
+  },
+  
+  getNearby: async (lat, lng, radius = 5, limit = 20) => {
+    const response = await api.get(`/public-toilets/nearby/${lat}/${lng}`, { 
+      params: { radius, limit } 
+    });
+    return response.data;
+  },
+  
+  getEcoFriendly: async (params = {}) => {
+    const response = await api.get('/public-toilets/eco-friendly/list', { params });
+    return response.data;
+  },
+  
+  search: async (query, params = {}) => {
+    const response = await api.get(`/public-toilets/search/${query}`, { params });
+    return response.data;
+  },
+  
+  getStats: async () => {
+    const response = await api.get('/public-toilets/stats/overview');
+    return response.data;
+  },
+  
+  rate: async (id, ratingData) => {
+    const response = await api.post(`/public-toilets/${id}/rate`, ratingData);
+    return response.data;
+  },
+  
+  reportStatus: async (id, statusData) => {
+    const response = await api.patch(`/public-toilets/${id}/report-status`, statusData);
+    return response.data;
+  },
+};
+
 // Health check
 export const healthAPI = {
   check: async () => {

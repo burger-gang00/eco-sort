@@ -15,6 +15,7 @@ const wasteLogRoutes = require('./routes/wasteLogs');
 const valuableMaterialRoutes = require('./routes/valuableMaterials');
 const scrapPriceRoutes = require('./routes/scrapPrices');
 const dashboardRoutes = require('./routes/dashboard');
+const publicToiletRoutes = require('./routes/publicToilets');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -84,6 +85,7 @@ app.use('/api/waste-logs', wasteLogRoutes);
 app.use('/api/valuable-materials', valuableMaterialRoutes);
 app.use('/api/scrap-prices', scrapPriceRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/public-toilets', publicToiletRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -102,7 +104,8 @@ app.get('/', (req, res) => {
         wasteLogs: '/api/waste-logs/*',
         valuableMaterials: '/api/valuable-materials/*',
         scrapPrices: '/api/scrap-prices/*',
-        dashboard: '/api/dashboard/*'
+        dashboard: '/api/dashboard/*',
+        publicToilets: '/api/public-toilets/*'
       }
     }
   });

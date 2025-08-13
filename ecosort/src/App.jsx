@@ -17,7 +17,7 @@ import PointsTracker from './components/PointsTracker';
 import BinMapSimple from './components/BinMapSimple';
 import ValuableGuide from './components/ValuableGuide';
 import ScrapPriceBoard from './components/ScrapPriceBoard';
-// import PublicToilets from './components/PublicToilets';
+import PublicToilets from './components/PublicToilets';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -88,7 +88,7 @@ function AppRoutes() {
           <Route path="scrap-prices" element={<ScrapPriceBoard />} />
           
           {/* Public Toilets - public */}
-          {/* <Route path="public-toilets" element={<PublicToilets />} /> */}
+          <Route path="public-toilets" element={<PublicToilets />} />
           
           {/* Protected routes */}
           <Route path="dashboard" element={
