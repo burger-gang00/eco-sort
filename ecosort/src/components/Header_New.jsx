@@ -17,7 +17,8 @@ import {
   Award,
   Gem,
   DollarSign,
-  Plus
+  Plus,
+  Building2
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -58,6 +59,12 @@ const Header = () => {
       description: 'Find nearby bins'
     },
     { 
+      path: '/public-toilets', 
+      label: 'Toilet Locator', 
+      icon: Building2,
+      description: 'Find clean facilities'
+    },
+    { 
       path: '/valuable-guide', 
       label: 'Valuable Materials', 
       icon: Gem,
@@ -79,12 +86,6 @@ const Header = () => {
       description: 'Your eco stats'
     },
     { 
-      path: '/points-tracker', 
-      label: 'Track Points', 
-      icon: Plus,
-      description: 'Earn eco points'
-    },
-    { 
       path: '/leaderboard', 
       label: 'Leaderboard', 
       icon: Trophy,
@@ -103,7 +104,7 @@ const Header = () => {
     return (
       <Link
         to={item.path}
-        className={`group relative flex items-center space-x-3 px-4 py-2 rounded-eco-md transition-all duration-300 ${
+        className={`group relative flex items-center space-x-2 px-3 py-2 rounded-eco-md transition-all duration-300 ${
           mobile 
             ? 'w-full hover:bg-eco-primary/10 hover:text-eco-primary' 
             : 'hover:bg-eco-bg-100'
@@ -119,7 +120,7 @@ const Header = () => {
         <div className={mobile ? '' : 'hidden lg:block'}>
           <div className="font-medium text-sm">{item.label}</div>
           {mobile && (
-            <div className="text-xs opacity-75">{item.description}</div>
+            <div className="text-[10px] opacity-75">{item.description}</div>
           )}
         </div>
         
@@ -148,8 +149,8 @@ const Header = () => {
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4">
+          <div className="flex items-center justify-between h-14 lg:h-16">
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -157,19 +158,19 @@ const Header = () => {
             >
               <Link 
                 to="/waste-guide" 
-                className="flex items-center space-x-3 group"
+                className="flex items-center space-x-2 group"
               >
                 <div className="relative">
-                  <div className="w-10 h-10 bg-gradient-eco rounded-eco-md flex items-center justify-center shadow-eco group-hover:shadow-eco-glow transition-all duration-300">
-                    <Leaf className="w-6 h-6 text-white" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-green-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
+                    <Leaf className="w-5 h-5 text-white" />
                   </div>
                   <div className="absolute inset-0 bg-gradient-eco rounded-eco-md opacity-0 group-hover:opacity-20 blur-xl transition-all duration-300"></div>
                 </div>
                 <div className="hidden sm:block">
-                  <h1 className="text-xl lg:text-2xl font-display font-bold text-gradient">
+                  <h1 className="text-lg lg:text-xl font-display font-bold bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
                     EcoSort
                   </h1>
-                  <p className="text-xs text-eco-text-tertiary -mt-1">
+                  <p className="text-[9px] text-slate-500 -mt-1">
                     Smart Waste Management
                   </p>
                 </div>
@@ -177,7 +178,7 @@ const Header = () => {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1">
+            <nav className="hidden lg:flex items-center space-x-0.5">
               {navItems.map((item) => (
                 <NavLink key={item.path} item={item} />
               ))}
@@ -239,14 +240,21 @@ const Header = () => {
                         <div className="p-2">
                           <Link
                             to="/profile"
-                            className="flex items-center space-x-3 px-4 py-3 hover:bg-eco-bg-50 rounded-eco text-eco-text-secondary hover:text-eco-primary transition-colors duration-300"
+                            className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 rounded-lg text-slate-600 hover:text-green-600 transition-colors duration-300"
                           >
                             <Settings className="w-5 h-5" />
                             <span>Profile Settings</span>
                           </Link>
+                          <Link
+                            to="/points-tracker"
+                            className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 rounded-lg text-slate-600 hover:text-green-600 transition-colors duration-300"
+                          >
+                            <Plus className="w-5 h-5" />
+                            <span>Track Points</span>
+                          </Link>
                           <button
                             onClick={handleLogout}
-                            className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-50 rounded-eco text-eco-text-secondary hover:text-red-600 transition-colors duration-300"
+                            className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-50 rounded-lg text-slate-600 hover:text-red-600 transition-colors duration-300"
                           >
                             <LogOut className="w-5 h-5" />
                             <span>Sign Out</span>
@@ -421,15 +429,23 @@ const Header = () => {
                     <div className="space-y-2">
                       <Link
                         to="/profile"
-                        className="flex items-center space-x-3 px-4 py-3 hover:bg-eco-bg-50 rounded-eco text-eco-text-secondary hover:text-eco-primary transition-colors duration-300"
+                        className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 rounded-lg text-slate-600 hover:text-green-600 transition-colors duration-300"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <Settings className="w-5 h-5" />
                         <span>Profile Settings</span>
                       </Link>
+                      <Link
+                        to="/points-tracker"
+                        className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 rounded-lg text-slate-600 hover:text-green-600 transition-colors duration-300"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Plus className="w-5 h-5" />
+                        <span>Track Points</span>
+                      </Link>
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-50 rounded-eco text-eco-text-secondary hover:text-red-600 transition-colors duration-300"
+                        className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-50 rounded-lg text-slate-600 hover:text-red-600 transition-colors duration-300"
                       >
                         <LogOut className="w-5 h-5" />
                         <span>Sign Out</span>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import CountUp from 'react-countup';
 import { 
@@ -155,40 +156,36 @@ const Profile = () => {
 
   // Mock user stats for now
   const mockStats = userStats || {
-    totalDisposals: 127,
-    points: 1540,
-    rank: 15,
-    weeklyDisposals: 12
+    totalDisposals: user?.totalDisposals || 0,
+    points: user?.points || 0,
+    rank: user?.rank || 0,
+    weeklyDisposals: 0
   };
 
   const stats = [
     {
       icon: Zap,
       label: 'Eco Points',
-      value: mockStats.points,
-      color: 'from-eco-primary to-eco-secondary',
-      prefix: ''
+      value: mockStats.points || 0,
+      color: 'from-green-400 to-green-600'
     },
     {
       icon: Trophy,
       label: 'Current Rank',
-      value: `#${mockStats.rank}`,
-      color: 'from-eco-accent to-eco-primary',
-      prefix: '#'
+      value: mockStats.rank || 0,
+      color: 'from-yellow-400 to-yellow-600'
     },
     {
       icon: TrendingUp,
       label: 'Total Disposals',
-      value: mockStats.totalDisposals,
-      color: 'from-eco-secondary to-eco-accent',
-      prefix: ''
+      value: mockStats.totalDisposals || 0,
+      color: 'from-blue-400 to-blue-600'
     },
     {
       icon: MapPin,
       label: 'This Week',
-      value: mockStats.weeklyDisposals,
-      color: 'from-eco-success to-eco-info',
-      prefix: ''
+      value: mockStats.weeklyDisposals || 0,
+      color: 'from-purple-400 to-purple-600'
     }
   ];
 
@@ -279,8 +276,8 @@ const Profile = () => {
                   </div>
                   
                   <div className="text-3xl font-bold text-eco-text-primary mb-2">
-                    {stat.prefix === '#' ? (
-                      <span>#{stat.value}</span>
+                    {stat.label === 'Current Rank' ? (
+                      <span>#{mockStats.rank || 'N/A'}</span>
                     ) : (
                       <CountUp
                         start={0}

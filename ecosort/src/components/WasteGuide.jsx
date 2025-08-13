@@ -343,8 +343,8 @@ const WasteGuide = () => {
                   onClick={() => setSelectedCategory(category.value)}
                   className={`relative overflow-hidden p-4 rounded-eco-md border-2 transition-all duration-300 ${
                     selectedCategory === category.value
-                      ? 'border-eco-primary bg-eco-primary text-white shadow-eco-glow'
-                      : 'border-eco-bg-300 hover:border-eco-primary/50 hover:shadow-eco'
+                      ? 'border-green-500 bg-green-500 text-white shadow-lg shadow-green-500/25'
+                      : 'border-eco-bg-300 hover:border-green-400/50 hover:shadow-eco'
                   }`}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -352,7 +352,9 @@ const WasteGuide = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 transition-opacity duration-300 ${
+                  <div className={`absolute inset-0 bg-gradient-to-br ${
+                    selectedCategory === category.value ? 'from-green-500 to-green-600' : category.gradient
+                  } opacity-0 transition-opacity duration-300 ${
                     selectedCategory === category.value ? 'opacity-100' : 'hover:opacity-10'
                   }`} />
                   <div className="relative z-10 text-center">

@@ -1,9 +1,9 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* Base Styles */
 @layer base {
@@ -47,26 +47,15 @@
   
   /* Advanced Button Variants */
   .btn-primary {
-    @apply relative overflow-hidden bg-gradient-eco text-white px-8 py-4 rounded-eco-md font-semibold text-sm tracking-wide transition-all duration-500 hover:shadow-eco-glow hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-30;
+    @apply relative overflow-hidden bg-gradient-to-r from-green-600 to-green-500 text-white px-8 py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-500 hover:shadow-lg hover:shadow-green-500/25 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-30;
   }
   
-  .btn-primary::before {
-    @apply absolute inset-0 bg-shimmer bg-[length:200%_100%] opacity-0 transition-opacity duration-300;
-    content: '';
+  .btn-ghost {
+    @apply px-6 py-3 text-slate-600 hover:text-green-600 hover:bg-slate-100 rounded-xl font-medium text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-30;
   }
   
-  .btn-primary:hover::before {
-    @apply opacity-100 animate-shimmer;
-  }
-  
-  .btn-primary::after {
-    @apply absolute inset-0 bg-gradient-eco opacity-0 transition-opacity duration-300;
-    content: '';
-    filter: brightness(1.2);
-  }
-  
-  .btn-primary:hover::after {
-    @apply opacity-20;
+  .btn-outline {
+    @apply px-6 py-3 border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-xl font-medium text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-30;
   }
   
   .btn-holographic {
@@ -139,7 +128,7 @@
   
   /* Advanced Navigation */
   .nav-link {
-    @apply relative text-eco-text-secondary hover:text-eco-primary-600 px-4 py-2 rounded-eco font-medium transition-all duration-300 hover:bg-eco-bg-100 overflow-hidden;
+    @apply relative text-eco-text-secondary hover:text-green-600 px-2 py-2 rounded-xl font-medium text-xs transition-all duration-300 hover:bg-slate-100 overflow-hidden;
   }
   
   .nav-link::before {
@@ -160,6 +149,23 @@
   
   .nav-link:hover::after {
     @apply w-full;
+  }
+  
+  /* Global navbar text sizing */
+  .navbar-text {
+    @apply text-xs;
+  }
+  
+  .navbar-description {
+    @apply text-[10px];
+  }
+  
+  .navbar-compact {
+    @apply space-x-0;
+  }
+  
+  .navbar-item-compact {
+    @apply px-2 space-x-1;
   }
   
   .nav-link-holographic {

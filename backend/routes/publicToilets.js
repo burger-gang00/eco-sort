@@ -419,6 +419,137 @@ router.get('/search/:query', async (req, res, next) => {
   }
 });
 
+// Add new toilet (user contribution)
+router.post('/', authMiddleware, async (req, res, next) => {
+  try {
+    const {
+      name,
+      address,
+      latitude,
+      longitude,
+      accessibility,
+      wifi,
+      parking,
+      babyFacilities,
+      isEcoFriendly,
+      openHours,
+      amenities,
+      features
+    } = req.body;
+
+    // Validation
+    if (!name || !address || !latitude || !longitude) {
+      return res.status(400).json({
+        success: false,
+        error: 'Name, address, latitude, and longitude are required'
+      });
+    }
+
+    if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid coordinates'
+      });
+    }
+
+    // Check if toilet already exists at similar location (within 50 meters)
+    const existingToilets = await prisma.publicToilet.findMany();
+    const nearbyToilet = existingToilets.find(toilet => 
+      calculateDistance(latitude, longitude, toilet.latitude, toilet.longitude) < 0.05
+    );
+
+    if (nearbyToilet) {
+      return res.status(409).json({
+        success: false,
+        error: 'A toilet already exists at this location',
+        existingToilet: nearbyToilet
+      });
+    }
+
+    const newToilet = await prisma.publicToilet.create({
+      data: {
+        name: name.trim(),
+        address: address.trim(),
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        accessibility: accessibility === true,
+        wifi: wifi === true,
+        parking: parking === true,
+        babyFacilities: babyFacilities === true,
+        isEcoFriendly: isEcoFriendly === true,
+        openHours: openHours || '24 hours',
+        amenities: amenities || [],
+        features: features || [],
+        status: 'OPEN',
+        sustainabilityScore: isEcoFriendly ? 75 : 50
+      }
+    });
+
+    res.status(201).json({
+      success: true,
+      data: newToilet,
+      message: 'Thank you for contributing! The toilet has been added successfully.'
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Add review to toilet
+router.post('/:id/review', authMiddleware, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { rating, cleanlinessRating, comment } = req.body;
+
+    if (!rating || rating < 1 || rating > 5) {
+      return res.status(400).json({
+        success: false,
+        error: 'Rating must be between 1 and 5'
+      });
+    }
+
+    const toilet = await prisma.publicToilet.findUnique({
+      where: { id }
+    });
+
+    if (!toilet) {
+      return res.status(404).json({
+        success: false,
+        error: 'Public toilet not found'
+      });
+    }
+
+    // Calculate new average rating
+    const newReviewCount = toilet.reviews + 1;
+    const newRating = ((toilet.rating * toilet.reviews) + rating) / newReviewCount;
+    
+    let updateData = {
+      rating: Math.round(newRating * 10) / 10,
+      reviews: newReviewCount,
+      updatedAt: new Date()
+    };
+
+    // Update cleanliness rating if provided
+    if (cleanlinessRating && cleanlinessRating >= 1 && cleanlinessRating <= 5) {
+      const newCleanlinessRating = ((toilet.cleanlinessRating * toilet.reviews) + cleanlinessRating) / newReviewCount;
+      updateData.cleanlinessRating = Math.round(newCleanlinessRating * 10) / 10;
+    }
+
+    const updatedToilet = await prisma.publicToilet.update({
+      where: { id },
+      data: updateData
+    });
+
+    res.json({
+      success: true,
+      data: updatedToilet,
+      message: 'Thank you for your review!'
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Helper function to calculate distance between two points using Haversine formula
 function calculateDistance(lat1, lng1, lat2, lng2) {
   const R = 6371; // Radius of the Earth in kilometers

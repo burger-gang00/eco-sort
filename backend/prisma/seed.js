@@ -142,13 +142,66 @@ const scrapPrices = [
   { materialName: 'Tin', pricePerKg: 280 }
 ];
 
+
+
 const publicToilets = [
-  {
-    name: 'Central Park Eco Facility',
-    address: '456 Green Street, Downtown',
-    latitude: 40.7829,
-    longitude: -73.9654,
-    rating: 4.8,
+  // Mumbai
+  { name: 'Gateway of India Public Restroom', address: 'Apollo Bandar, Colaba, Mumbai, Maharashtra 400001', latitude: 18.9220, longitude: 72.8347, rating: 4.2, reviews: 156, accessibility: true, wifi: true, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '6:00 AM - 11:00 PM', features: ['solar_powered', 'water_recycling'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi', 'parking'], cleanlinessRating: 4.1, sustainabilityScore: 85, carbonFootprint: '2.1 kg CO2/day', waterSaved: '150L/day' },
+  { name: 'Marine Drive Clean Facilities', address: 'Marine Drive, Mumbai, Maharashtra 400020', latitude: 18.9441, longitude: 72.8226, rating: 4.0, reviews: 89, accessibility: true, wifi: false, parking: false, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '24 Hours', features: ['eco_friendly', 'sensor_taps'], amenities: ['wheelchair_accessible', 'baby_changing'], cleanlinessRating: 3.9, sustainabilityScore: 78 },
+  { name: 'Chhatrapati Shivaji Terminus Facilities', address: 'CST, Fort, Mumbai, Maharashtra 400001', latitude: 18.9398, longitude: 72.8355, rating: 3.8, reviews: 234, accessibility: true, wifi: true, parking: false, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '5:00 AM - 12:00 AM', features: ['24x7_cleaning'], amenities: ['wheelchair_accessible', 'wifi'], cleanlinessRating: 3.5, sustainabilityScore: 45 },
+  
+  // Delhi
+  { name: 'India Gate Public Restroom', address: 'Rajpath, India Gate, New Delhi, Delhi 110001', latitude: 28.6129, longitude: 77.2295, rating: 4.3, reviews: 198, accessibility: true, wifi: true, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '6:00 AM - 10:00 PM', features: ['solar_powered', 'rainwater_harvesting'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi', 'parking'], cleanlinessRating: 4.2, sustainabilityScore: 90, carbonFootprint: '1.8 kg CO2/day', waterSaved: '200L/day' },
+  { name: 'Red Fort Eco Facilities', address: 'Netaji Subhash Marg, Lal Qila, Chandni Chowk, New Delhi, Delhi 110006', latitude: 28.6562, longitude: 77.2410, rating: 4.1, reviews: 145, accessibility: true, wifi: false, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '9:00 AM - 6:00 PM', features: ['composting_toilets', 'greywater_treatment'], amenities: ['wheelchair_accessible', 'baby_changing', 'parking'], cleanlinessRating: 4.0, sustainabilityScore: 88 },
+  { name: 'Connaught Place Central Facilities', address: 'Connaught Place, New Delhi, Delhi 110001', latitude: 28.6315, longitude: 77.2167, rating: 3.9, reviews: 267, accessibility: true, wifi: true, parking: false, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '24 Hours', features: ['cctv_monitored'], amenities: ['wheelchair_accessible', 'wifi'], cleanlinessRating: 3.7, sustainabilityScore: 55 },
+  
+  // Bangalore
+  { name: 'Lalbagh Botanical Garden Restroom', address: 'Lalbagh Main Rd, Mavalli, Bengaluru, Karnataka 560004', latitude: 12.9507, longitude: 77.5848, rating: 4.4, reviews: 112, accessibility: true, wifi: false, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '6:00 AM - 8:00 PM', features: ['bio_toilets', 'natural_ventilation'], amenities: ['wheelchair_accessible', 'baby_changing', 'parking'], cleanlinessRating: 4.3, sustainabilityScore: 92 },
+  { name: 'Cubbon Park Green Facilities', address: 'Kasturba Rd, Sampangi Rama Nagar, Bengaluru, Karnataka 560001', latitude: 12.9762, longitude: 77.5993, rating: 4.2, reviews: 87, accessibility: true, wifi: true, parking: false, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '5:30 AM - 9:00 PM', features: ['solar_lighting', 'water_efficient'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi'], cleanlinessRating: 4.1, sustainabilityScore: 86 },
+  { name: 'Bangalore Palace Visitor Facilities', address: 'Vasanth Nagar, Bengaluru, Karnataka 560052', latitude: 12.9988, longitude: 77.5926, rating: 4.0, reviews: 76, accessibility: true, wifi: true, parking: true, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '10:00 AM - 5:30 PM', features: ['heritage_maintained'], amenities: ['wheelchair_accessible', 'wifi', 'parking'], cleanlinessRating: 3.8, sustainabilityScore: 60 },
+  
+  // Chennai
+  { name: 'Marina Beach Public Restroom', address: 'Marina Beach, Chennai, Tamil Nadu 600004', latitude: 13.0475, longitude: 80.2824, rating: 3.7, reviews: 203, accessibility: true, wifi: false, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '5:00 AM - 11:00 PM', features: ['coastal_resistant', 'solar_powered'], amenities: ['wheelchair_accessible', 'baby_changing', 'parking'], cleanlinessRating: 3.5, sustainabilityScore: 75 },
+  { name: 'Kapaleeshwarar Temple Facilities', address: 'Mylapore, Chennai, Tamil Nadu 600004', latitude: 13.0339, longitude: 80.2619, rating: 3.9, reviews: 134, accessibility: false, wifi: false, parking: false, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '4:00 AM - 10:00 PM', features: ['traditional_design'], amenities: [], cleanlinessRating: 3.6, sustainabilityScore: 40 },
+  
+  // Kolkata
+  { name: 'Victoria Memorial Restroom', address: '1, Queens Way, Maidan, Kolkata, West Bengal 700071', latitude: 22.5448, longitude: 88.3426, rating: 4.1, reviews: 167, accessibility: true, wifi: true, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '10:00 AM - 5:00 PM', features: ['heritage_compliant', 'eco_friendly'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi', 'parking'], cleanlinessRating: 4.0, sustainabilityScore: 82 },
+  { name: 'Howrah Bridge Area Facilities', address: 'Strand Rd, Kolkata, West Bengal 700001', latitude: 22.5851, longitude: 88.3468, rating: 3.6, reviews: 189, accessibility: false, wifi: false, parking: false, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '24 Hours', features: ['high_traffic'], amenities: [], cleanlinessRating: 3.2, sustainabilityScore: 35 },
+  
+  // Hyderabad
+  { name: 'Charminar Heritage Restroom', address: 'Charminar Rd, Char Kaman, Ghansi Bazaar, Hyderabad, Telangana 500002', latitude: 17.3616, longitude: 78.4747, rating: 3.8, reviews: 145, accessibility: true, wifi: false, parking: false, babyFacilities: true, isEcoFriendly: false, status: 'OPEN', openHours: '6:00 AM - 10:00 PM', features: ['heritage_area'], amenities: ['wheelchair_accessible', 'baby_changing'], cleanlinessRating: 3.6, sustainabilityScore: 50 },
+  { name: 'Hussain Sagar Lake Facilities', address: 'Tank Bund Rd, Hyderabad, Telangana 500080', latitude: 17.4239, longitude: 78.4738, rating: 4.0, reviews: 98, accessibility: true, wifi: true, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '5:00 AM - 11:00 PM', features: ['lakeside_location', 'eco_friendly'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi', 'parking'], cleanlinessRating: 3.9, sustainabilityScore: 78 },
+  
+  // Pune
+  { name: 'Shaniwar Wada Visitor Facilities', address: 'Shaniwar Peth, Pune, Maharashtra 411030', latitude: 18.5196, longitude: 73.8553, rating: 4.2, reviews: 89, accessibility: true, wifi: true, parking: false, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '8:00 AM - 6:00 PM', features: ['historical_site', 'solar_powered'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi'], cleanlinessRating: 4.1, sustainabilityScore: 85 },
+  { name: 'Pune Railway Station Facilities', address: 'Railway Station Rd, Pune, Maharashtra 411001', latitude: 18.5314, longitude: 73.8770, rating: 3.5, reviews: 234, accessibility: true, wifi: false, parking: false, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '24 Hours', features: ['high_capacity'], amenities: ['wheelchair_accessible'], cleanlinessRating: 3.2, sustainabilityScore: 40 },
+  
+  // Ahmedabad
+  { name: 'Sabarmati Ashram Restroom', address: 'Sabarmati Ashram Rd, Ahmedabad, Gujarat 380027', latitude: 23.0614, longitude: 72.5800, rating: 4.3, reviews: 156, accessibility: true, wifi: true, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '8:30 AM - 6:30 PM', features: ['gandhian_principles', 'eco_friendly'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi', 'parking'], cleanlinessRating: 4.2, sustainabilityScore: 95 },
+  { name: 'Kankaria Lake Facilities', address: 'Kankaria, Ahmedabad, Gujarat 380008', latitude: 23.0045, longitude: 72.5965, rating: 4.0, reviews: 123, accessibility: true, wifi: false, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '5:00 AM - 10:00 PM', features: ['lakeside', 'family_friendly'], amenities: ['wheelchair_accessible', 'baby_changing', 'parking'], cleanlinessRating: 3.8, sustainabilityScore: 80 },
+  
+  // Jaipur
+  { name: 'Hawa Mahal Tourist Facilities', address: 'Hawa Mahal Rd, Badi Choupad, J.D.A. Market, Pink City, Jaipur, Rajasthan 302002', latitude: 26.9239, longitude: 75.8267, rating: 4.1, reviews: 178, accessibility: true, wifi: true, parking: false, babyFacilities: true, isEcoFriendly: false, status: 'OPEN', openHours: '9:00 AM - 4:30 PM', features: ['tourist_area', 'pink_city_theme'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi'], cleanlinessRating: 3.9, sustainabilityScore: 65 },
+  { name: 'City Palace Visitor Restroom', address: 'Tulsi Marg, Gangori Bazaar, J.D.A. Market, Pink City, Jaipur, Rajasthan 302002', latitude: 26.9255, longitude: 75.8235, rating: 4.0, reviews: 145, accessibility: true, wifi: false, parking: true, babyFacilities: true, isEcoFriendly: false, status: 'OPEN', openHours: '9:30 AM - 5:00 PM', features: ['royal_heritage'], amenities: ['wheelchair_accessible', 'baby_changing', 'parking'], cleanlinessRating: 3.8, sustainabilityScore: 55 },
+  
+  // Kochi
+  { name: 'Fort Kochi Beach Facilities', address: 'Fort Kochi Beach, Kochi, Kerala 682001', latitude: 9.9654, longitude: 76.2424, rating: 3.9, reviews: 167, accessibility: true, wifi: false, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '6:00 AM - 10:00 PM', features: ['beachside', 'coastal_design'], amenities: ['wheelchair_accessible', 'baby_changing', 'parking'], cleanlinessRating: 3.7, sustainabilityScore: 72 },
+  { name: 'Marine Drive Kochi Restroom', address: 'Marine Dr, Ernakulam, Kochi, Kerala 682031', latitude: 9.9816, longitude: 76.2999, rating: 4.2, reviews: 134, accessibility: true, wifi: true, parking: false, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '5:00 AM - 11:00 PM', features: ['waterfront', 'modern_design'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi'], cleanlinessRating: 4.0, sustainabilityScore: 83 },
+  
+  // Goa
+  { name: 'Baga Beach Public Restroom', address: 'Baga Beach, Calangute, Goa 403516', latitude: 15.5557, longitude: 73.7516, rating: 3.6, reviews: 289, accessibility: false, wifi: false, parking: true, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '24 Hours', features: ['beach_location'], amenities: ['parking'], cleanlinessRating: 3.3, sustainabilityScore: 30 },
+  { name: 'Panaji City Center Facilities', address: 'MG Rd, Panaji, Goa 403001', latitude: 15.4909, longitude: 73.8278, rating: 4.0, reviews: 156, accessibility: true, wifi: true, parking: false, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '6:00 AM - 10:00 PM', features: ['city_center', 'portuguese_influence'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi'], cleanlinessRating: 3.8, sustainabilityScore: 75 },
+  
+  // Varanasi
+  { name: 'Dashashwamedh Ghat Facilities', address: 'Dashashwamedh Ghat, Varanasi, Uttar Pradesh 221001', latitude: 25.3094, longitude: 83.0177, rating: 3.4, reviews: 234, accessibility: false, wifi: false, parking: false, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '5:00 AM - 11:00 PM', features: ['ghat_location', 'spiritual_site'], amenities: [], cleanlinessRating: 3.0, sustainabilityScore: 25 },
+  { name: 'Varanasi Railway Station Restroom', address: 'Varanasi Cantt Railway Station, Varanasi, Uttar Pradesh 221002', latitude: 25.2677, longitude: 82.9913, rating: 3.2, reviews: 345, accessibility: true, wifi: false, parking: false, babyFacilities: false, isEcoFriendly: false, status: 'OPEN', openHours: '24 Hours', features: ['railway_station'], amenities: ['wheelchair_accessible'], cleanlinessRating: 2.9, sustainabilityScore: 30 },
+  
+  // Agra
+  { name: 'Taj Mahal Visitor Facilities', address: 'Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001', latitude: 27.1751, longitude: 78.0421, rating: 4.5, reviews: 567, accessibility: true, wifi: true, parking: true, babyFacilities: true, isEcoFriendly: true, status: 'OPEN', openHours: '6:00 AM - 6:30 PM', features: ['world_heritage', 'premium_facilities'], amenities: ['wheelchair_accessible', 'baby_changing', 'wifi', 'parking'], cleanlinessRating: 4.4, sustainabilityScore: 88 },
+  { name: 'Agra Fort Tourist Restroom', address: 'Agra Fort, Rakabganj, Agra, Uttar Pradesh 282003', latitude: 27.1795, longitude: 78.0211, rating: 4.2, reviews: 234, accessibility: true, wifi: false, parking: true, babyFacilities: true, isEcoFriendly: false, status: 'OPEN', openHours: '6:00 AM - 6:00 PM', features: ['historical_fort'], amenities: ['wheelchair_accessible', 'baby_changing', 'parking'], cleanlinessRating: 4.0, sustainabilityScore: 70 }
+];
+
+// Using the Indian toilet locations defined above
     reviews: 124,
     accessibility: true,
     wifi: true,

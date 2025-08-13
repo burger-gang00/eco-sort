@@ -222,6 +222,74 @@ router.get('/stats/overview', async (req, res, next) => {
   }
 });
 
+// POST /api/bins - Add new bin (user contribution)
+router.post('/', authMiddleware, async (req, res, next) => {
+  try {
+    const {
+      name,
+      latitude,
+      longitude,
+      type,
+      capacity
+    } = req.body;
+
+    // Validation
+    if (!name || !latitude || !longitude || !type) {
+      return res.status(400).json({
+        success: false,
+        error: 'Name, latitude, longitude, and type are required'
+      });
+    }
+
+    if (!['WET', 'DRY', 'E_WASTE', 'HAZARDOUS', 'RECYCLABLE'].includes(type.toUpperCase())) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid bin type. Valid types: WET, DRY, E_WASTE, HAZARDOUS, RECYCLABLE'
+      });
+    }
+
+    if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid coordinates'
+      });
+    }
+
+    // Check if bin already exists at similar location (within 50 meters)
+    const existingBins = await prisma.bin.findMany();
+    const nearbyBin = existingBins.find(bin => 
+      calculateDistance(latitude, longitude, bin.latitude, bin.longitude) < 0.05
+    );
+
+    if (nearbyBin) {
+      return res.status(409).json({
+        success: false,
+        error: 'A bin already exists at this location',
+        existingBin: nearbyBin
+      });
+    }
+
+    const newBin = await prisma.bin.create({
+      data: {
+        name: name.trim(),
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        type: type.toUpperCase(),
+        capacity: capacity ? parseInt(capacity) : 240, // Default 240L capacity
+        isFull: false
+      }
+    });
+
+    res.status(201).json({
+      success: true,
+      data: newBin,
+      message: 'Thank you for contributing! The bin has been added successfully.'
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // PATCH /api/bins/:id/report-full - Mark bin as full
 router.patch('/:id/report-full', authMiddleware, async (req, res, next) => {
   try {
@@ -257,6 +325,47 @@ router.patch('/:id/report-full', authMiddleware, async (req, res, next) => {
       success: true,
       data: updatedBin,
       message: 'Bin marked as full. Thank you for reporting!'
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PATCH /api/bins/:id/report-empty - Mark bin as empty (for maintenance)
+router.patch('/:id/report-empty', authMiddleware, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const bin = await prisma.bin.findUnique({
+      where: { id }
+    });
+
+    if (!bin) {
+      return res.status(404).json({
+        success: false,
+        error: 'Bin not found'
+      });
+    }
+
+    if (!bin.isFull) {
+      return res.status(400).json({
+        success: false,
+        error: 'Bin is already marked as empty'
+      });
+    }
+
+    const updatedBin = await prisma.bin.update({
+      where: { id },
+      data: { 
+        isFull: false,
+        updatedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      data: updatedBin,
+      message: 'Bin marked as empty. Thank you for the update!'
     });
   } catch (error) {
     next(error);

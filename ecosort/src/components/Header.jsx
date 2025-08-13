@@ -21,6 +21,7 @@ import {
   Building2
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import toast from 'react-hot-toast';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,6 +60,12 @@ const Header = () => {
       description: 'Find nearby bins'
     },
     { 
+      path: '/public-toilets', 
+      label: 'Toilet Locator', 
+      icon: Building2,
+      description: 'Find clean facilities'
+    },
+    { 
       path: '/valuable-guide', 
       label: 'Valuable Materials', 
       icon: Gem,
@@ -69,12 +76,6 @@ const Header = () => {
       label: 'Scrap Prices', 
       icon: DollarSign,
       description: 'Current market rates'
-    },
-    { 
-      path: '/public-toilets', 
-      label: 'Public Toilets', 
-      icon: Building2,
-      description: 'Find clean facilities'
     }
   ];
 
@@ -84,12 +85,6 @@ const Header = () => {
       label: 'Dashboard', 
       icon: BarChart3,
       description: 'Your eco stats'
-    },
-    { 
-      path: '/points-tracker', 
-      label: 'Track Points', 
-      icon: Plus,
-      description: 'Earn eco points'
     },
     { 
       path: '/leaderboard', 
@@ -106,14 +101,26 @@ const Header = () => {
 
   const NavLink = ({ item, mobile = false }) => {
     const isActive = location.pathname === item.path;
+    const isProtected = authenticatedNavItems.some(authItem => authItem.path === item.path);
+    const isDisabled = isProtected && !isAuthenticated;
+    
+    const handleClick = (e) => {
+      if (isDisabled) {
+        e.preventDefault();
+        toast.error('Please login to access this feature');
+      }
+    };
     
     return (
       <Link
         to={item.path}
-        className={`group relative flex items-center space-x-3 px-4 py-2 rounded-eco-md transition-all duration-300 ${
-          mobile 
-            ? 'w-full hover:bg-eco-primary/10 hover:text-eco-primary' 
-            : 'hover:bg-eco-bg-100'
+        onClick={handleClick}
+        className={`group relative flex items-center space-x-2 px-3 py-2 rounded-eco-md transition-all duration-300 ${
+          isDisabled 
+            ? 'opacity-50 cursor-not-allowed' 
+            : mobile 
+              ? 'w-full hover:bg-eco-primary/10 hover:text-eco-primary' 
+              : 'hover:bg-eco-bg-100'
         } ${
           isActive 
             ? mobile 
@@ -127,6 +134,9 @@ const Header = () => {
           <div className="font-medium text-sm">{item.label}</div>
           {mobile && (
             <div className="text-xs opacity-75">{item.description}</div>
+          )}
+          {isDisabled && (
+            <div className="text-xs text-orange-500">Login required</div>
           )}
         </div>
         
@@ -155,8 +165,8 @@ const Header = () => {
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+          <div className="flex items-center justify-between h-12 lg:h-14">
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -164,19 +174,19 @@ const Header = () => {
             >
               <Link 
                 to="/waste-guide" 
-                className="flex items-center space-x-3 group"
+                className="flex items-center space-x-2 group"
               >
                 <div className="relative">
-                  <div className="w-10 h-10 bg-gradient-eco rounded-eco-md flex items-center justify-center shadow-eco group-hover:shadow-eco-glow transition-all duration-300">
-                    <Leaf className="w-6 h-6 text-white" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-green-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
+                    <Leaf className="w-5 h-5 text-white" />
                   </div>
                   <div className="absolute inset-0 bg-gradient-eco rounded-eco-md opacity-0 group-hover:opacity-20 blur-xl transition-all duration-300"></div>
                 </div>
                 <div className="hidden sm:block">
-                  <h1 className="text-xl lg:text-2xl font-display font-bold text-gradient">
+                  <h1 className="text-lg lg:text-xl font-display font-bold bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
                     EcoSort
                   </h1>
-                  <p className="text-xs text-eco-text-tertiary -mt-1">
+                  <p className="text-[9px] text-slate-500 -mt-1">
                     Smart Waste Management
                   </p>
                 </div>
@@ -184,17 +194,18 @@ const Header = () => {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1">
+            <nav className="hidden lg:flex items-center space-x-0">
               {navItems.map((item) => (
                 <NavLink key={item.path} item={item} />
               ))}
-              {isAuthenticated && authenticatedNavItems.map((item) => (
+              {/* Always show Dashboard and Leaderboard, but disable if not authenticated */}
+              {authenticatedNavItems.map((item) => (
                 <NavLink key={item.path} item={item} />
               ))}
             </nav>
 
             {/* Right Section */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-1">
               {/* User Menu or Auth Buttons */}
               {isAuthenticated ? (
                 <div className="relative">
@@ -202,21 +213,9 @@ const Header = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className="flex items-center space-x-3 px-4 py-2 bg-gradient-eco text-white rounded-eco-md shadow-eco hover:shadow-eco-glow transition-all duration-300"
+                    className="w-10 h-10 bg-gradient-to-r from-green-600 to-green-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-green-500/25 transition-all duration-300"
                   >
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                      <User className="w-4 h-4" />
-                    </div>
-                    <div className="hidden sm:block text-left">
-                      <div className="text-sm font-medium">{user?.name || 'User'}</div>
-                      <div className="text-xs opacity-75 flex items-center space-x-1">
-                        <Award className="w-3 h-3" />
-                        <span>{user?.points || 0} points</span>
-                      </div>
-                    </div>
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${
-                      isUserMenuOpen ? 'rotate-180' : ''
-                    }`} />
+                    <User className="w-5 h-5 text-white" />
                   </motion.button>
 
                   {/* User Dropdown */}
@@ -246,14 +245,21 @@ const Header = () => {
                         <div className="p-2">
                           <Link
                             to="/profile"
-                            className="flex items-center space-x-3 px-4 py-3 hover:bg-eco-bg-50 rounded-eco text-eco-text-secondary hover:text-eco-primary transition-colors duration-300"
+                            className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 rounded-lg text-slate-600 hover:text-green-600 transition-colors duration-300"
                           >
                             <Settings className="w-5 h-5" />
                             <span>Profile Settings</span>
                           </Link>
+                          <Link
+                            to="/points-tracker"
+                            className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 rounded-lg text-slate-600 hover:text-green-600 transition-colors duration-300"
+                          >
+                            <Plus className="w-5 h-5" />
+                            <span>Track Points</span>
+                          </Link>
                           <button
                             onClick={handleLogout}
-                            className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-50 rounded-eco text-eco-text-secondary hover:text-red-600 transition-colors duration-300"
+                            className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-50 rounded-lg text-slate-600 hover:text-red-600 transition-colors duration-300"
                           >
                             <LogOut className="w-5 h-5" />
                             <span>Sign Out</span>
@@ -264,10 +270,10 @@ const Header = () => {
                   </AnimatePresence>
                 </div>
               ) : (
-                <div className="hidden sm:flex items-center space-x-3">
+                <div className="flex items-center space-x-2">
                   <Link
                     to="/login"
-                    className="btn-ghost"
+                    className="hidden sm:inline-flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-green-600 transition-colors duration-300"
                   >
                     Sign In
                   </Link>
@@ -277,7 +283,7 @@ const Header = () => {
                   >
                     <Link
                       to="/register"
-                      className="btn-primary"
+                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-600 to-green-500 text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300"
                     >
                       Get Started
                     </Link>
@@ -372,21 +378,17 @@ const Header = () => {
                     </motion.div>
                   ))}
                   
-                  {isAuthenticated && (
-                    <>
-                      <div className="my-4 h-px bg-eco-bg-200" />
-                      {authenticatedNavItems.map((item, index) => (
-                        <motion.div
-                          key={item.path}
-                          initial={{ opacity: 0, x: 50 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: (navItems.length + index) * 0.1 }}
-                        >
-                          <NavLink item={item} mobile />
-                        </motion.div>
-                      ))}
-                    </>
-                  )}
+                  <div className="my-4 h-px bg-eco-bg-200" />
+                  {authenticatedNavItems.map((item, index) => (
+                    <motion.div
+                      key={item.path}
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: (navItems.length + index) * 0.1 }}
+                    >
+                      <NavLink item={item} mobile />
+                    </motion.div>
+                  ))}
                 </div>
 
                 {/* Mobile Auth Section */}
@@ -428,15 +430,23 @@ const Header = () => {
                     <div className="space-y-2">
                       <Link
                         to="/profile"
-                        className="flex items-center space-x-3 px-4 py-3 hover:bg-eco-bg-50 rounded-eco text-eco-text-secondary hover:text-eco-primary transition-colors duration-300"
+                        className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 rounded-lg text-slate-600 hover:text-green-600 transition-colors duration-300"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <Settings className="w-5 h-5" />
                         <span>Profile Settings</span>
                       </Link>
+                      <Link
+                        to="/points-tracker"
+                        className="flex items-center space-x-3 px-4 py-3 hover:bg-slate-50 rounded-lg text-slate-600 hover:text-green-600 transition-colors duration-300"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Plus className="w-5 h-5" />
+                        <span>Track Points</span>
+                      </Link>
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-50 rounded-eco text-eco-text-secondary hover:text-red-600 transition-colors duration-300"
+                        className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-50 rounded-lg text-slate-600 hover:text-red-600 transition-colors duration-300"
                       >
                         <LogOut className="w-5 h-5" />
                         <span>Sign Out</span>
